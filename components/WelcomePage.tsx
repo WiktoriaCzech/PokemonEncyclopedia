@@ -1,14 +1,18 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import {
   View,
   Text,
   StyleSheet,
   Pressable,
   ScrollView,
-  Image,
   Dimensions,
 } from "react-native";
+import { Image } from "expo-image";
+import { AppStack } from "../App";
 
-function WelcomePage() {
+type WelcomePageProps = NativeStackScreenProps<AppStack, "WelcomePage", "id_1">;
+
+function WelcomePage({ navigation }: WelcomePageProps) {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -17,14 +21,21 @@ function WelcomePage() {
       <View style={styles.upperFieldShadow}></View>
       <View style={styles.upperField}></View>
       <View style={styles.textField}>
-        <Text style={styles.mainText}>Pokemon</Text>
-        <Text style={[styles.mainText, styles.secondField]}>
-          {" "}
-          Encyclopedia!
-        </Text>
+        <View style={styles.textGroup}>
+          <Text style={[styles.mainText, styles.firstField]}>Wellcome</Text>
+          <Text style={[styles.mainText, styles.comma]}>,</Text>
+        </View>
+        <Text style={[styles.mainText, styles.secondField]}>to the best</Text>
+        <Text style={[styles.mainText, styles.thirdField]}>Pokémon</Text>
+        <Text style={[styles.mainText, styles.fourthField]}>Encyclopedia!</Text>
       </View>
       <View style={styles.btnPlacement}>
-        <Pressable style={styles.startBtn}>
+        <Pressable
+          style={styles.startBtn}
+          onPress={() => {
+            navigation.navigate("HomeScreen");
+          }}
+        >
           <Text style={styles.btnText}>Let's start!</Text>
         </Pressable>
       </View>
@@ -33,7 +44,7 @@ function WelcomePage() {
 }
 export default WelcomePage;
 
-const imageWidth = Dimensions.get("window").width - 2 * 15;
+//const imageWidth = Dimensions.get("window").width - 2 * 15;
 
 const styles = StyleSheet.create({
   container: {
@@ -76,18 +87,38 @@ const styles = StyleSheet.create({
   textField: {
     marginTop: 15,
     flex: 1,
+    marginLeft: 35,
     justifyContent: "center",
     alignItems: "flex-start",
     marginHorizontal: 15,
-    marginLeft: 55,
+    //marginLeft: 55,
   },
   mainText: {
     fontSize: 40,
     fontWeight: "700",
     color: "#F5EFE7",
   },
+  textGroup: {
+    flexDirection: "row",
+    gap: 1,
+  },
+  comma: {
+    fontSize: 30,
+    fontWeight: "400",
+  },
+  firstField: {
+    fontSize: 30,
+    fontWeight: "400",
+  },
   secondField: {
-    marginLeft: 20,
+    fontWeight: "400",
+    fontSize: 32,
+    marginTop: 5,
+  },
+  thirdField: {
+    marginTop: 5,
+  },
+  fourthField: {
     marginTop: 5,
   },
   btnPlacement: {

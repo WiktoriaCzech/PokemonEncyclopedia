@@ -8,8 +8,14 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { StyleSheet, Text, View } from "react-native";
 
 import WelcomePage from "./components/WelcomePage";
+import HomeScreen from "./components/HomeScreen";
 
-const Stack = createNativeStackNavigator();
+export type AppStack = {
+  WelcomePage: undefined;
+  HomeScreen: undefined;
+};
+
+const Stack = createNativeStackNavigator<AppStack>();
 
 declare global {
   interface Window {
@@ -35,9 +41,10 @@ export default function App() {
             headerShown: false,
           }}
           // initialRouteName="Home"
-          initialRouteName="WecomePage"
+          initialRouteName="WelcomePage"
         >
-          <Stack.Screen name="Home" component={WelcomePage} />
+          <Stack.Screen name="WelcomePage" component={WelcomePage} />
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

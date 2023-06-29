@@ -120,9 +120,18 @@ function Pokedex({ navigation, route }: PokedexProps) {
   return (
     <View style={styles.container}>
       <View style={styles.mainTitle}>
-        <Text style={styles.mainTitleText}>{route.params.name}</Text>
+        <View style={styles.gobackWrapper}>
+          <Pressable
+            style={styles.goBackArrow}
+            onPress={() => navigation.goBack()}
+          >
+            <Text style={styles.arrow}>{"<"}</Text>
+          </Pressable>
+          <Text style={styles.mainTitleText}>{route.params.name}</Text>
+        </View>
         <Text style={styles.descriptionText}>{route.params.description}</Text>
       </View>
+
       <Text style={styles.selectText}>Select pokémon type</Text>
       <View style={styles.cardsHolder}>
         {!dataReceived ? (
@@ -164,6 +173,9 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   mainTitleText: {
+    flex: 1,
+    textAlign: "center",
+    marginLeft: -34,
     fontWeight: "700",
     color: "#F5EFE7",
     fontSize: 26,
@@ -183,7 +195,6 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   cardsHolder: {
-    //borderWidth: 1,
     marginHorizontal: 15,
     flex: 1,
     marginBottom: 50,
@@ -261,5 +272,27 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flex: 1,
+  },
+  goBackArrow: {
+    textAlign: "center",
+    borderBottomWidth: 1,
+    height: 34,
+    width: 34,
+    //marginTop: 58,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    zIndex: 1000,
+  },
+  arrow: {
+    color: "#F5EFE7",
+    fontSize: 30,
+    fontWeight: "600",
+    marginTop: -4,
+    textAlign: "center",
+  },
+  gobackWrapper: {
+    textAlign: "center",
+    flexDirection: "row",
   },
 });

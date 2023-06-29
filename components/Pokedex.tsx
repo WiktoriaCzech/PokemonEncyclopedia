@@ -96,7 +96,15 @@ function Pokedex({ navigation, route }: PokedexProps) {
     return (
       <>
         {item.id !== "18" && item.id !== "19" && (
-          <Pressable style={styles.card}>
+          <Pressable
+            style={styles.card}
+            onPress={() => {
+              navigation.navigate("PokemonTypeList", {
+                url: item.url,
+                name: item.name,
+              });
+            }}
+          >
             <View
               style={[
                 styles.colorTypeContainer,
@@ -125,7 +133,10 @@ function Pokedex({ navigation, route }: PokedexProps) {
             style={styles.goBackArrow}
             onPress={() => navigation.goBack()}
           >
-            <Text style={styles.arrow}>{"<"}</Text>
+            <Image
+              style={styles.arrowBackImage}
+              source={require("../assets/arrow_white.png")}
+            />
           </Pressable>
           <Text style={styles.mainTitleText}>{route.params.name}</Text>
         </View>
@@ -135,7 +146,7 @@ function Pokedex({ navigation, route }: PokedexProps) {
       <Text style={styles.selectText}>Select pokémon type</Text>
       <View style={styles.cardsHolder}>
         {!dataReceived ? (
-          <ActivityIndicator style={styles.isLoading} />
+          <ActivityIndicator style={styles.isLoading} size="large" />
         ) : (
           updatedData !== undefined && (
             <FlatList
@@ -294,5 +305,10 @@ const styles = StyleSheet.create({
   gobackWrapper: {
     textAlign: "center",
     flexDirection: "row",
+  },
+  arrowBackImage: {
+    flex: 1,
+    aspectRatio: 1,
+    contentFit: "contain",
   },
 });

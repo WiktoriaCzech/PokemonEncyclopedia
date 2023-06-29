@@ -10,6 +10,7 @@ import { StyleSheet, Text, View } from "react-native";
 import WelcomePage from "./components/WelcomePage";
 import HomeScreen from "./components/HomeScreen";
 import Pokedex from "./components/Pokedex";
+import PokemonTypeList from "./components/PokemonTypeList";
 
 export type AppStack = {
   WelcomePage: undefined;
@@ -17,6 +18,10 @@ export type AppStack = {
   Pokedex: {
     name: string;
     description: string;
+  };
+  PokemonTypeList: {
+    url: string;
+    name: string;
   };
 };
 
@@ -51,6 +56,7 @@ export default function App() {
           <Stack.Screen name="WelcomePage" component={WelcomePage} />
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="Pokedex" component={Pokedex} />
+          <Stack.Screen name="PokemonTypeList" component={PokemonTypeList} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

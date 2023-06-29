@@ -161,6 +161,6 @@ const styles = StyleSheet.create({
   mainImage: {
     flex: 1,
     aspectRatio: 1,
-    resizeMode: "contain",
+    contentFit: "contain",
   },
 });

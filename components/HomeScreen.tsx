@@ -58,7 +58,16 @@ function HomeScreen({ navigation }: HomeScreenProps) {
 
   const Item = ({ item }: { item: CardProps }) => {
     return (
-      <Pressable style={styles.card}>
+      <Pressable
+        style={styles.card}
+        onPress={() => {
+          item.id === "1" &&
+            navigation.navigate("Pokedex", {
+              name: item.name,
+              description: item.description,
+            });
+        }}
+      >
         <View style={styles.imageContainer}>
           <Image style={styles.image} source={item.photo} />
         </View>
@@ -136,7 +145,7 @@ const styles = StyleSheet.create({
   card: {
     marginHorizontal: 5,
     flex: 1,
-    aspectRatio: 16 / 9,
+    aspectRatio: 1.85 / 1,
     backgroundColor: "#D8C4B6",
     shadowColor: "#213555",
     shadowOpacity: 0.45,

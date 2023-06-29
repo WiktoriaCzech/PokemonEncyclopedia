@@ -77,7 +77,14 @@ function PokemonTypeList({ navigation, route }: TypeListProps) {
 
   const Item = ({ item }: { item: ApiResponse }) => {
     return (
-      <Pressable onPress={() => {}} style={[styles.pokemonCard]}>
+      <Pressable
+        onPress={() => {
+          navigation.navigate("Pokemon", {
+            url: item.pokemon.url,
+          });
+        }}
+        style={[styles.pokemonCard]}
+      >
         <Image
           style={styles.image}
           source={require("../assets/pokeball.jpg")}
@@ -148,7 +155,7 @@ function PokemonTypeList({ navigation, route }: TypeListProps) {
       </View>
       <View style={styles.contentData}>
         {!dataReceived ? (
-          <ActivityIndicator size="large" />
+          <ActivityIndicator size="large" style={styles.isLoading} />
         ) : (
           <View style={styles.flatlistWrapper}>
             <FlatList
@@ -449,5 +456,11 @@ const styles = StyleSheet.create({
   active: {
     backgroundColor: "#F67546",
     alignItems: "center",
+  },
+  isLoading: {
+    //backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
   },
 });

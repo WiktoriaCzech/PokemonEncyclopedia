@@ -11,6 +11,7 @@ import WelcomePage from "./components/WelcomePage";
 import HomeScreen from "./components/HomeScreen";
 import Pokedex from "./components/Pokedex";
 import PokemonTypeList from "./components/PokemonTypeList";
+import Pokemon from "./components/Pokemon";
 
 export type AppStack = {
   WelcomePage: undefined;
@@ -22,6 +23,9 @@ export type AppStack = {
   PokemonTypeList: {
     url: string;
     name: string;
+  };
+  Pokemon: {
+    url: string;
   };
 };
 
@@ -57,6 +61,7 @@ export default function App() {
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="Pokedex" component={Pokedex} />
           <Stack.Screen name="PokemonTypeList" component={PokemonTypeList} />
+          <Stack.Screen name="Pokemon" component={Pokemon} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

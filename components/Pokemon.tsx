@@ -26,14 +26,14 @@ export interface ApiResponse {
     ability: {
       name: string;
       url: string;
-    }[];
-  };
+    };
+  }[];
 }
 
 type PokemonProps = NativeStackScreenProps<AppStack, "Pokemon", "id_5">;
-
+console.log("chuj");
 function Pokemon({ navigation, route }: PokemonProps) {
-  const [dataFromAPI, setDataFromAPI] = useState<ApiResponse[]>([]);
+  const [dataFromAPI, setDataFromAPI] = useState<ApiResponse | null>(null);
   const [dataReceived, setDataReceived] = useState(false);
 
   const panelInfo = "Pokemon";
@@ -47,7 +47,7 @@ function Pokemon({ navigation, route }: PokemonProps) {
       const response = await fetch(route.params.url);
       const body = await response.json();
       setDataFromAPI(body);
-      //console.log(dataFromAPI.sprites.front_default);
+      //console.log(dataFromAPI);
       setDataReceived(true);
     } catch (error) {
       setDataReceived(false);
@@ -56,7 +56,7 @@ function Pokemon({ navigation, route }: PokemonProps) {
   };
   return (
     <View style={styles.container}>
-      {!dataReceived ? (
+      {!dataReceived || dataFromAPI === null ? (
         <ActivityIndicator size="large" style={styles.isLoading} />
       ) : (
         <ScrollView style={styles.upperFieldShadow}>

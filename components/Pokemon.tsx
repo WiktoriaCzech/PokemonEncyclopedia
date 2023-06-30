@@ -31,7 +31,6 @@ export interface ApiResponse {
 }
 
 type PokemonProps = NativeStackScreenProps<AppStack, "Pokemon", "id_5">;
-console.log("chuj");
 function Pokemon({ navigation, route }: PokemonProps) {
   const [dataFromAPI, setDataFromAPI] = useState<ApiResponse | null>(null);
   const [dataReceived, setDataReceived] = useState(false);

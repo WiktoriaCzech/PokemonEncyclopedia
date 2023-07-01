@@ -193,6 +193,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   descriptionText: {
+    marginLeft: 5,
     fontWeight: "400",
     color: "#F5EFE7",
     fontSize: 16,
@@ -305,6 +306,7 @@ const styles = StyleSheet.create({
   gobackWrapper: {
     textAlign: "center",
     flexDirection: "row",
+    marginBottom: 10,
   },
   arrowBackImage: {
     flex: 1,

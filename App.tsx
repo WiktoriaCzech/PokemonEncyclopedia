@@ -12,6 +12,7 @@ import HomeScreen from "./components/HomeScreen";
 import Pokedex from "./components/Pokedex";
 import PokemonTypeList from "./components/PokemonTypeList";
 import Pokemon from "./components/Pokemon";
+import DailyCard from "./components/DailyCard";
 
 export type AppStack = {
   WelcomePage: undefined;
@@ -27,6 +28,7 @@ export type AppStack = {
   Pokemon: {
     url: string;
   };
+  DailyCard: undefined;
 };
 
 const Stack = createNativeStackNavigator<AppStack>();
@@ -62,6 +64,7 @@ export default function App() {
           <Stack.Screen name="Pokedex" component={Pokedex} />
           <Stack.Screen name="PokemonTypeList" component={PokemonTypeList} />
           <Stack.Screen name="Pokemon" component={Pokemon} />
+          <Stack.Screen name="DailyCard" component={DailyCard} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

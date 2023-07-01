@@ -66,6 +66,7 @@ function HomeScreen({ navigation }: HomeScreenProps) {
               name: item.name,
               description: item.description,
             });
+          item.id === "0" && navigation.navigate("DailyCard");
         }}
       >
         <View style={styles.imageContainer}>

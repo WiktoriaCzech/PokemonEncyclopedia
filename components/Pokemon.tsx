@@ -151,7 +151,6 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 30,
     overflow: "hidden",
-
     marginVertical: 50,
     marginHorizontal: 20,
   },

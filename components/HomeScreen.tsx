@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5EFE7",
     flex: 1,
     aspectRatio: 1,
-    resizeMode: "cover",
+    contentFit: "cover",
     borderRadius: 10,
   },
   textCard: {

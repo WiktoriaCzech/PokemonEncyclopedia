@@ -7,6 +7,9 @@ import {
   Dimensions,
   ActivityIndicator,
   SafeAreaView,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Platform,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 
@@ -27,6 +30,7 @@ export interface ApiResponse {
     url: string;
   };
 }
+const windowHeight = Dimensions.get("window").height;
 
 function PokemonTypeList({ navigation, route }: TypeListProps) {
   const windowWidth = Dimensions.get("window").width;
@@ -113,7 +117,13 @@ function PokemonTypeList({ navigation, route }: TypeListProps) {
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={
+        clicked && Platform.OS == "android"
+          ? [styles.container, { minHeight: "200%" }]
+          : styles.container
+      }
+    >
       <View style={styles.upperFieldShadow}></View>
       <View style={styles.upperField}>
         <View style={styles.gobackWrapper}>
@@ -153,32 +163,34 @@ function PokemonTypeList({ navigation, route }: TypeListProps) {
           </Pressable>
         </View>
       </View>
-      <View style={styles.contentData}>
-        {!dataReceived ? (
-          <ActivityIndicator size="large" style={styles.isLoading} />
-        ) : (
-          <View style={styles.flatlistWrapper}>
-            <FlatList
-              data={sortedList}
-              renderItem={renderItem}
-              keyExtractor={(item, index) => index.toString()}
-              contentContainerStyle={{
-                paddingBottom: 20,
-                rowGap: windowWidth * 0.04,
-              }}
-              numColumns={2}
-              columnWrapperStyle={{
-                columnGap: windowWidth * 0.04,
-              }}
-              style={
-                !filtr
-                  ? styles.flatlist
-                  : [styles.flatlist, styles.filtersActive]
-              }
-            />
-          </View>
-        )}
-      </View>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.contentData}>
+          {!dataReceived ? (
+            <ActivityIndicator size="large" style={styles.isLoading} />
+          ) : (
+            <View style={styles.flatlistWrapper}>
+              <FlatList
+                data={sortedList}
+                renderItem={renderItem}
+                keyExtractor={(item, index) => index.toString()}
+                contentContainerStyle={{
+                  paddingBottom: 20,
+                  rowGap: windowWidth * 0.04,
+                }}
+                numColumns={2}
+                columnWrapperStyle={{
+                  columnGap: windowWidth * 0.04,
+                }}
+                style={
+                  !filtr
+                    ? styles.flatlist
+                    : [styles.flatlist, styles.filtersActive]
+                }
+              />
+            </View>
+          )}
+        </View>
+      </TouchableWithoutFeedback>
       <View style={filtr ? styles.displayFiltr : styles.displayNone}>
         <View style={styles.uperSide}>
           <Pressable
@@ -248,16 +260,17 @@ export default PokemonTypeList;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    //height: windowHeight,
     backgroundColor: "#4F709C",
     fontFamily: "System",
-    zIndex: -1,
+    //zIndex: -1,
   },
   upperField: {
     height: "19%",
     //flex: 1,
     backgroundColor: "#F5EFE7",
     borderBottomLeftRadius: 30,
-    //zIndex: 1,
+    elevation: 3,
     shadowColor: "#213555",
     shadowOpacity: 0.35,
     shadowOffset: { width: 0, height: 0 },
@@ -276,6 +289,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.35,
     shadowOffset: { width: 0, height: 0 },
     blurRadius: 10,
+    elevation: 3,
     // zIndex: 0,
   },
   arrowBackImage: {
@@ -329,6 +343,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 0 },
     blurRadius: 6,
+    elevation: 3,
   },
   filterImage: {
     flex: 1,
@@ -356,6 +371,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 0 },
     blurRadius: 7,
+    elevation: 3,
   },
   image: {
     flex: 2,
@@ -394,6 +410,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.35,
     shadowOffset: { width: 0, height: 0 },
     blurRadius: 25,
+    elevation: 3,
   },
   uperSide: {
     flexDirection: "row",

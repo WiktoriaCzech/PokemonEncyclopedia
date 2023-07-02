@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.35,
     shadowOffset: { width: 0, height: 0 },
     blurRadius: 10,
+    elevation: 3,
   },
   upperFieldShadow: {
     height: "35%",
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.35,
     shadowOffset: { width: 0, height: 0 },
     blurRadius: 10,
-    // zIndex: 0,
+    elevation: 3,
   },
   textField: {
     marginTop: 15,
@@ -136,6 +137,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.35,
     shadowOffset: { width: 0, height: 0 },
     blurRadius: 10,
+    elevation: 3,
   },
   btnText: {
     color: "#213555",

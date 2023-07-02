@@ -1,5 +1,13 @@
 import React from "react";
-import { StyleSheet, TextInput, View, Keyboard, Button } from "react-native";
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  Keyboard,
+  Button,
+  Pressable,
+  Text,
+} from "react-native";
 import { Feather, Entypo } from "@expo/vector-icons";
 
 const SearchBar = ({
@@ -48,14 +56,16 @@ const SearchBar = ({
       {/* cancel button, depending on whether the search bar is clicked or not */}
       {clicked && (
         <View>
-          <Button
-            title="Cancel"
-            color={"#213555"}
+          <Pressable
+            // title="Cancel"
+            //color={"#213555"}
             onPress={() => {
               Keyboard.dismiss();
               setClicked(false);
             }}
-          ></Button>
+          >
+            <Text style={styles.cancelText}>Cancel</Text>
+          </Pressable>
         </View>
       )}
     </View>
@@ -103,5 +113,10 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     color: "#666666",
     flex: 1,
+  },
+  cancelText: {
+    color: "#213555",
+    fontSize: 16,
+    marginLeft: 5,
   },
 });

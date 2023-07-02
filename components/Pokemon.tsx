@@ -14,9 +14,6 @@ import { Image } from "expo-image";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppStack } from "../App";
 
-import * as pokephoto from "./LocalData";
-const cards = pokephoto.cards;
-
 export interface ApiResponse {
   name: string;
   height: number;
@@ -53,10 +50,10 @@ function Pokemon({ navigation, route }: PokemonProps) {
 
   const panelInfo = "Pokemon";
   useEffect(() => {
-    fetchAllPokemonInThisType();
+    fetchPokemon();
   }, []);
 
-  const fetchAllPokemonInThisType = async () => {
+  const fetchPokemon = async () => {
     setDataReceived(false);
     try {
       const response = await fetch(route.params.url);
@@ -74,68 +71,70 @@ function Pokemon({ navigation, route }: PokemonProps) {
       {!dataReceived || dataFromAPI === null ? (
         <ActivityIndicator size="large" style={styles.isLoading} />
       ) : (
-        <ScrollView style={styles.upperFieldShadow}>
-          <View style={styles.gobackWrapper}>
-            <Pressable
-              style={styles.goBackArrow}
-              onPress={() => navigation.goBack()}
-            >
-              <Image
-                style={styles.arrowBackImage}
-                source={require("../assets/arrow_dark.png")}
-              />
-            </Pressable>
-            <Text style={styles.mainTitleText}>{dataFromAPI.name}</Text>
-          </View>
-          <View style={styles.wrapper}>
-            <View style={styles.imageWrapper}>
-              <Image
-                style={styles.image}
-                source={dataFromAPI.sprites.front_default}
-              />
+        <View style={styles.wrapTheChild}>
+          <ScrollView style={styles.upperFieldShadow}>
+            <View style={styles.gobackWrapper}>
+              <Pressable
+                style={styles.goBackArrow}
+                onPress={() => navigation.goBack()}
+              >
+                <Image
+                  style={styles.arrowBackImage}
+                  source={require("../assets/arrow_dark.png")}
+                />
+              </Pressable>
+              <Text style={styles.mainTitleText}>{dataFromAPI.name}</Text>
             </View>
-            <View style={styles.displayDataWrapper}>
-              <View style={styles.textWrapper}>
-                <Text style={styles.text}>
-                  Height: {dataFromAPI.height / 10}m
-                </Text>
-                <Text style={styles.text}>
-                  Weight: {dataFromAPI.weight / 10}kg
-                </Text>
+            <View style={styles.wrapper}>
+              <View style={styles.imageWrapper}>
+                <Image
+                  style={styles.image}
+                  source={dataFromAPI.sprites.front_default}
+                />
               </View>
-              <Text style={[styles.text, styles.textBold]}>Types:</Text>
-              <View style={styles.TypesWrapper}>
-                {dataFromAPI.types.map((singleType, index) => (
-                  <Text style={[styles.text, styles.type]} key={index}>
-                    {singleType.type.name}
+              <View style={styles.displayDataWrapper}>
+                <View style={styles.textWrapper}>
+                  <Text style={styles.text}>
+                    Height: {dataFromAPI.height / 10}m
                   </Text>
-                ))}
+                  <Text style={styles.text}>
+                    Weight: {dataFromAPI.weight / 10}kg
+                  </Text>
+                </View>
+                <Text style={[styles.text, styles.textBold]}>Types:</Text>
+                <View style={styles.TypesWrapper}>
+                  {dataFromAPI.types.map((singleType, index) => (
+                    <Text style={[styles.text, styles.type]} key={index}>
+                      {singleType.type.name}
+                    </Text>
+                  ))}
+                </View>
               </View>
             </View>
-          </View>
-          <View style={styles.moreInfoWrapper}>
-            <Text style={styles.title}>Abilities:</Text>
-            {dataFromAPI.abilities.map((pokemon, index) => (
-              <Text style={[styles.text, styles.list]} key={index}>
-                •{pokemon.ability.name}
+            <View style={styles.moreInfoWrapper}>
+              <Text style={styles.title}>Abilities:</Text>
+              {dataFromAPI.abilities.map((pokemon, index) => (
+                <Text style={[styles.text, styles.list]} key={index}>
+                  •{pokemon.ability.name}
+                </Text>
+              ))}
+            </View>
+            <View style={styles.moreInfoWrapper}>
+              <Text style={styles.text}>
+                Base experience: {dataFromAPI.base_experience} exp
               </Text>
-            ))}
-          </View>
-          <View style={styles.moreInfoWrapper}>
-            <Text style={styles.text}>
-              Base experience: {dataFromAPI.base_experience} exp
-            </Text>
-          </View>
+            </View>
 
-          <View style={[styles.moreInfoWrapper, styles.endTheList]}>
-            <Text style={styles.title}>Moves:</Text>
-            {dataFromAPI.moves.map((pokemonMove, index) => (
-              <Text style={[styles.text, styles.list]} key={index}>
-                •{pokemonMove.move.name}
-              </Text>
-            ))}
-          </View>
-        </ScrollView>
+            <View style={[styles.moreInfoWrapper, styles.endTheList]}>
+              <Text style={styles.title}>Moves:</Text>
+              {dataFromAPI.moves.map((pokemonMove, index) => (
+                <Text style={[styles.text, styles.list]} key={index}>
+                  •{pokemonMove.move.name}
+                </Text>
+              ))}
+            </View>
+          </ScrollView>
+        </View>
       )}
     </View>
   );
@@ -148,14 +147,19 @@ const styles = StyleSheet.create({
     fontFamily: "System",
     zIndex: -1,
   },
-  upperFieldShadow: {
-    //height: "19%",
+  wrapTheChild: {
     flex: 1,
+    borderRadius: 30,
+    overflow: "hidden",
+
     marginVertical: 50,
     marginHorizontal: 20,
+  },
+  upperFieldShadow: {
+    flex: 1,
     backgroundColor: "#F5EFE7",
     borderRadius: 30,
-    //zIndex: 1,
+    overflow: "hidden",
     shadowColor: "#213555",
     shadowOpacity: 0.35,
     shadowOffset: { width: 0, height: 0 },
@@ -181,6 +185,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     flexDirection: "row",
     marginHorizontal: 15,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
   },
   mainTitleText: {
     fontWeight: "700",
@@ -200,6 +206,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.35,
     shadowOffset: { width: 0, height: 0 },
     blurRadius: 10,
+    elevation: 3,
     backgroundColor: "#F5EFE7",
     // borderWidth: 1,
     // borderColor: "#4F709C",

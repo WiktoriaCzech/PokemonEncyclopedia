@@ -221,6 +221,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     blurRadius: 10,
     borderRadius: 10,
+    elevation: 3,
     flexDirection: "row",
   },
   colorTypeContainer: {
@@ -232,6 +233,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.45,
     shadowOffset: { width: 0, height: 0 },
     blurRadius: 10,
+    elevation: 3,
     marginRight: 15,
   },
   imageContainer: {
@@ -242,6 +244,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.45,
     shadowOffset: { width: 0, height: 0 },
     blurRadius: 10,
+    elevation: 3,
     borderRadius: 10,
   },
   image: {

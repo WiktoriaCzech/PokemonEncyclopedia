@@ -7,6 +7,7 @@ import {
   Dimensions,
   ActivityIndicator,
   SafeAreaView,
+  PixelRatio,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 
@@ -80,7 +81,7 @@ function DailyCard({ navigation }: DailyCardProps) {
       generateToken();
     }
     checkTokenValidity();
-  }, [checkTokenValidity, isValid]);
+  }, [isValid]);
 
   return (
     <View style={styles.container}>
@@ -212,6 +213,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.35,
     shadowOffset: { width: 0, height: 0 },
     blurRadius: 10,
+    elevation: 3,
   },
   generateToken: {
     margin: 20,
@@ -220,6 +222,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#F5EFE7",
     borderRadius: 10,
+    elevation: 3,
     shadowColor: "#213555",
     shadowOpacity: 0.35,
     shadowOffset: { width: 0, height: 0 },
@@ -272,6 +275,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#EA2F25",
     shadowColor: "#213555",
     shadowOpacity: 0.35,
+    elevation: 3,
     shadowOffset: { width: 0, height: 0 },
     blurRadius: 10,
     aspectRatio: 0.77 / 1,

@@ -14,7 +14,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppStack } from "../App";
 import { FlatList } from "react-native-gesture-handler";
 
-type ItemsProps = NativeStackScreenProps<AppStack, "Items", "id_7">;
+type ItemsProps = NativeStackScreenProps<AppStack, "ItemsAndLocations", "id_7">;
 
 export interface ApiDataProps {
   count: number;
@@ -26,18 +26,13 @@ export interface ApiDataProps {
   }[];
 }
 
-export interface singleItem {
-  name: string;
-  url: string;
-}
-
-function Items({ navigation, route }: ItemsProps) {
+function ItemsAndLocations({ navigation, route }: ItemsProps) {
   const [dataFromAPI, setDataFromAPI] = useState<ApiDataProps>();
   const [dataReceived, setDataReceived] = useState(false);
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(50);
 
-  const panelInfo = "Item list";
+  const panelInfo = route.params.panel_info;
 
   useEffect(() => {
     fetchDataAboutItems();
@@ -47,7 +42,12 @@ function Items({ navigation, route }: ItemsProps) {
     setDataReceived(false);
     try {
       const response = await fetch(
-        window.api_url + "item?offset=" + offset + "&limit=" + limit
+        window.api_url +
+          route.params.url_part +
+          "?offset=" +
+          offset +
+          "&limit=" +
+          limit
       );
       const body: ApiDataProps = await response.json();
       setDataFromAPI(body);
@@ -72,6 +72,8 @@ function Items({ navigation, route }: ItemsProps) {
       </View>
     );
   };
+  const listName = route.params.name;
+
   return (
     <View style={styles.container}>
       <View style={styles.mainTitle}>
@@ -90,7 +92,9 @@ function Items({ navigation, route }: ItemsProps) {
         <Text style={styles.descriptionText}>{route.params.description}</Text>
       </View>
 
-      <Text style={styles.selectText}>List of all items</Text>
+      <Text style={styles.selectText}>
+        List of all {listName.charAt(0).toLowerCase() + listName.slice(1)}
+      </Text>
       <View style={styles.cardsHolder}>
         {!dataReceived ? (
           <ActivityIndicator style={styles.isLoading} size="large" />
@@ -131,7 +135,7 @@ function Items({ navigation, route }: ItemsProps) {
                   <Text>Load more</Text>
                 </Pressable>
                 <Text style={styles.additionalInfo}>
-                  Showing {offset + limit} out of 2050.
+                  Showing {offset + limit} out of {dataFromAPI.count}.
                 </Text>
               </View>
             </>
@@ -141,7 +145,7 @@ function Items({ navigation, route }: ItemsProps) {
     </View>
   );
 }
-export default Items;
+export default ItemsAndLocations;
 const styles = StyleSheet.create({
   container: {
     flex: 1,

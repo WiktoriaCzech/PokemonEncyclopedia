@@ -68,9 +68,18 @@ function HomeScreen({ navigation }: HomeScreenProps) {
             });
           item.id === "0" && navigation.navigate("DailyCard");
           item.id === "2" &&
-            navigation.navigate("Items", {
+            navigation.navigate("ItemsAndLocations", {
               name: item.name,
               description: item.description,
+              panel_info: "Items",
+              url_part: "item",
+            });
+          item.id === "3" &&
+            navigation.navigate("ItemsAndLocations", {
+              name: item.name,
+              description: item.description,
+              panel_info: "Locations",
+              url_part: "location",
             });
         }}
       >

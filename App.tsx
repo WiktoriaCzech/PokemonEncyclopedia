@@ -13,7 +13,7 @@ import Pokedex from "./components/Pokedex";
 import PokemonTypeList from "./components/PokemonTypeList";
 import Pokemon from "./components/Pokemon";
 import DailyCard from "./components/DailyCard";
-import Items from "./components/Items";
+import ItemsAndLocations from "./components/ItemsAndLocations";
 
 export type AppStack = {
   WelcomePage: undefined;
@@ -30,9 +30,11 @@ export type AppStack = {
     url: string;
   };
   DailyCard: undefined;
-  Items: {
+  ItemsAndLocations: {
     name: string;
     description: string;
+    panel_info: string;
+    url_part: string;
   };
 };
 
@@ -70,7 +72,10 @@ export default function App() {
           <Stack.Screen name="PokemonTypeList" component={PokemonTypeList} />
           <Stack.Screen name="Pokemon" component={Pokemon} />
           <Stack.Screen name="DailyCard" component={DailyCard} />
-          <Stack.Screen name="Items" component={Items} />
+          <Stack.Screen
+            name="ItemsAndLocations"
+            component={ItemsAndLocations}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

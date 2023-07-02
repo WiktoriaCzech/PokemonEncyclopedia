@@ -14,6 +14,9 @@ import { Image } from "expo-image";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppStack } from "../App";
 
+import * as pokephoto from "./LocalData";
+const cards = pokephoto.cards;
+
 export interface ApiResponse {
   name: string;
   height: number;
@@ -24,6 +27,19 @@ export interface ApiResponse {
   };
   abilities: {
     ability: {
+      name: string;
+      url: string;
+    };
+  }[];
+  types: {
+    slot: number;
+    type: {
+      name: string;
+      url: string;
+    };
+  }[];
+  moves: {
+    move: {
       name: string;
       url: string;
     };
@@ -78,13 +94,23 @@ function Pokemon({ navigation, route }: PokemonProps) {
                 source={dataFromAPI.sprites.front_default}
               />
             </View>
-            <View style={styles.textWrapper}>
-              <Text style={styles.text}>
-                Height: {dataFromAPI.height / 10}m
-              </Text>
-              <Text style={styles.text}>
-                Weight: {dataFromAPI.weight / 10}kg
-              </Text>
+            <View style={styles.displayDataWrapper}>
+              <View style={styles.textWrapper}>
+                <Text style={styles.text}>
+                  Height: {dataFromAPI.height / 10}m
+                </Text>
+                <Text style={styles.text}>
+                  Weight: {dataFromAPI.weight / 10}kg
+                </Text>
+              </View>
+              <Text style={[styles.text, styles.textBold]}>Types:</Text>
+              <View style={styles.TypesWrapper}>
+                {dataFromAPI.types.map((singleType, index) => (
+                  <Text style={[styles.text, styles.type]} key={index}>
+                    {singleType.type.name}
+                  </Text>
+                ))}
+              </View>
             </View>
           </View>
           <View style={styles.moreInfoWrapper}>
@@ -99,6 +125,15 @@ function Pokemon({ navigation, route }: PokemonProps) {
             <Text style={styles.text}>
               Base experience: {dataFromAPI.base_experience} exp
             </Text>
+          </View>
+
+          <View style={[styles.moreInfoWrapper, styles.endTheList]}>
+            <Text style={styles.title}>Moves:</Text>
+            {dataFromAPI.moves.map((pokemonMove, index) => (
+              <Text style={[styles.text, styles.list]} key={index}>
+                •{pokemonMove.move.name}
+              </Text>
+            ))}
           </View>
         </ScrollView>
       )}
@@ -159,7 +194,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginHorizontal: 15,
     borderRadius: 10,
-    //borderWidth: 1,
     height: 150,
     aspectRatio: 1 / 0.87,
     shadowColor: "#000",
@@ -210,5 +244,25 @@ const styles = StyleSheet.create({
   },
   list: {
     marginLeft: 5,
+  },
+  textBold: {
+    fontWeight: "700",
+  },
+  TypesWrapper: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  type: {
+    borderWidth: 1,
+    borderColor: "#213555",
+    borderRadius: 5,
+    padding: 5,
+  },
+  displayDataWrapper: {
+    flex: 1,
+    marginRight: 15,
+  },
+  endTheList: {
+    marginBottom: 20,
   },
 });

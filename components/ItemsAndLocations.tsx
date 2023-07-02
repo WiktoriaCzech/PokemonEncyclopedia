@@ -244,6 +244,7 @@ const styles = StyleSheet.create({
     flex: 1,
     aspectRatio: 1,
     contentFit: "contain",
+    marginBottom: 5,
   },
   smallSquare: {
     backgroundColor: "#F5EFE7",

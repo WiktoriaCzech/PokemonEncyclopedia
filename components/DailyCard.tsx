@@ -139,11 +139,7 @@ function DailyCard({ navigation }: DailyCardProps) {
               >
                 <Image
                   style={styles.image}
-                  source={require("../assets/mark.png")}
-                />
-                <Image
-                  style={styles.image}
-                  source={require("../assets/pokemonLogo.png")}
+                  source={require("../assets/dailyCard.png")}
                 />
               </Pressable>
             </View>
@@ -283,7 +279,7 @@ const styles = StyleSheet.create({
   image: {
     borderRadius: 10,
     flex: 1,
-    contentFit: "contain",
+    contentFit: "cover",
   },
   applyTint: {
     tintColor: "black",
@@ -299,7 +295,7 @@ const styles = StyleSheet.create({
     zIndex: 0,
     left: 0,
     right: 0,
-    bottom: 80,
+    bottom: 60,
     top: 0,
     borderRadius: 10,
     backgroundColor: "#000",

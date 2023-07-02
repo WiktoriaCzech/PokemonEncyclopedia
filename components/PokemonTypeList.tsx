@@ -42,10 +42,6 @@ function PokemonTypeList({ navigation, route }: TypeListProps) {
 
   const panelInfo = "PokemonTypeList";
 
-  useEffect(() => {
-    fetchAllPokemonInThisType();
-  }, []);
-
   const fetchAllPokemonInThisType = async () => {
     setDataReceived(false);
     try {
@@ -59,6 +55,10 @@ function PokemonTypeList({ navigation, route }: TypeListProps) {
       console.log("There was an issue in ", panelInfo, ": ", error);
     }
   };
+
+  useEffect(() => {
+    fetchAllPokemonInThisType();
+  }, []);
 
   let sortedList: ApiResponse[] | undefined = dataReceived
     ? [...dataFromAPI].sort((a, b): any => {
@@ -83,7 +83,7 @@ function PokemonTypeList({ navigation, route }: TypeListProps) {
             url: item.pokemon.url,
           });
         }}
-        style={[styles.pokemonCard]}
+        style={styles.pokemonCard}
       >
         <Image
           style={styles.image}
@@ -348,17 +348,6 @@ const styles = StyleSheet.create({
   },
   pokemonCard: {
     flex: 1,
-    borderRadius: 10,
-    aspectRatio: 0.87 / 1,
-    height: 150,
-    backgroundColor: "#fff",
-    shadowColor: "#000",
-    shadowOpacity: 0.2,
-    shadowOffset: { width: 0, height: 0 },
-    blurRadius: 7,
-  },
-  pokemonCardHalf: {
-    flex: 0,
     borderRadius: 10,
     aspectRatio: 0.87 / 1,
     height: 150,

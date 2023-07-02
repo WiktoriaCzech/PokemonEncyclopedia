@@ -80,7 +80,7 @@ function DailyCard({ navigation }: DailyCardProps) {
       generateToken();
     }
     checkTokenValidity();
-  }, []);
+  }, [checkTokenValidity, isValid]);
 
   return (
     <View style={styles.container}>

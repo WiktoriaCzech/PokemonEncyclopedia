@@ -34,10 +34,6 @@ function ItemsAndLocations({ navigation, route }: ItemsProps) {
 
   const panelInfo = route.params.panel_info;
 
-  useEffect(() => {
-    fetchDataAboutItems();
-  }, [offset]);
-
   const fetchDataAboutItems = async () => {
     setDataReceived(false);
     try {
@@ -58,6 +54,10 @@ function ItemsAndLocations({ navigation, route }: ItemsProps) {
       console.log("There was an issue in ", panelInfo, ": ", error);
     }
   };
+
+  useEffect(() => {
+    fetchDataAboutItems();
+  }, [offset]);
 
   const Item = ({ item }: any) => {
     //console.log(item);

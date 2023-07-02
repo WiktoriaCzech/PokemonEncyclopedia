@@ -256,28 +256,11 @@ const styles = StyleSheet.create({
     color: "#213555",
     fontWeight: "400",
   },
-  discoverCard: {
-    flexDirection: "column",
-    color: "#213555",
-    fontWeight: "600",
-    fontSize: 24,
-  },
+
   textContainer: {
     marginTop: 30,
     flex: 1,
     marginLeft: 20,
-  },
-  description: {
-    marginTop: 5,
-    marginRight: 5,
-    fontSize: 16,
-    color: "#213555",
-    fontWeight: "400",
-  },
-  withUnderline: {
-    //textDecorationLine: "underline",
-    //borderWidth: 1,
-    fontSize: 26,
   },
   isLoading: {
     //backgroundColor: "#fff",
@@ -295,13 +278,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 10,
     zIndex: 1000,
-  },
-  arrow: {
-    color: "#F5EFE7",
-    fontSize: 30,
-    fontWeight: "600",
-    marginTop: -4,
-    textAlign: "center",
   },
   gobackWrapper: {
     textAlign: "center",

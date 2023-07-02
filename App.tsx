@@ -5,8 +5,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-import { StyleSheet, Text, View } from "react-native";
-
 import WelcomePage from "./components/WelcomePage";
 import HomeScreen from "./components/HomeScreen";
 import Pokedex from "./components/Pokedex";
@@ -81,16 +79,3 @@ export default function App() {
     </GestureHandlerRootView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 0,
-    padding: 0,
-    backgroundColor: "#fff",
-    fontFamily: "System",
-    fontSize: 20,
-  },
-});

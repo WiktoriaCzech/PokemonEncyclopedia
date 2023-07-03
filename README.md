@@ -3,7 +3,7 @@ For the best experience it is preferable to run this app on mobile.
 
 ## Running the app on mobile device
 Firstly you need to install **Expo Go** from App Store or from Google Play
-The next step is to open this project on your IDE and type _npx expo start --tunnel_ into terminal.
+The next step is to open this project on your IDE and type _npx expo start --tunnel_ into terminal, please use npm instead of yarn!
 It will show the QR code that is need to be scanned via your camera app on IOS or QR code scanner on android.
 Sometimes project is taking up to ~2 minutes for getting ready, but it should work fine.
 
